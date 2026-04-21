@@ -1,16 +1,9 @@
-/* =====================================================
-   PORTFÓLIO — ALEXANDRE DE CAMPOS
-   Arquivo de estilos (CSS3 puro, sem frameworks)
-   ===================================================== */
+/* PORTFÓLIO */
 
 
-/* =====================================================
-   1. VARIÁVEIS CSS (CUSTOM PROPERTIES)
-   Centralizam cores, fontes e tamanhos.
-   Alterar aqui afeta o site inteiro.
-   ===================================================== */
+/* 1. VARIÁVEIS CSS  */
 :root {
-    /* Paleta militar / oliva — TEMA CLARO (padrão) */
+   
     --color-bg:            #f5f2e8;  /* fundo principal: off-white/bone */
     --color-bg-alt:        #ebe5d2;  /* fundo alternativo mais escuro */
     --color-surface:       #ffffff;  /* cards e superfícies */
@@ -47,7 +40,7 @@
     --transition-slow: 0.4s ease;
 }
 
-/* Sobrescrita para o TEMA ESCURO (aplicado quando <html data-theme="dark">) */
+/* Sobrescrita para o TEMA ESCURO */
 [data-theme="dark"] {
     --color-bg:            #1a1d14;
     --color-bg-alt:        #252a1a;
@@ -67,9 +60,6 @@
 }
 
 
-/* =====================================================
-   2. RESET E ESTILOS BASE
-   ===================================================== */
 
 /* Remove margens/paddings padrão de todos os elementos
    e usa box-sizing para facilitar o cálculo de tamanhos */
@@ -82,7 +72,7 @@
 }
 
 html {
-    /* Scroll suave ao clicar em âncoras do menu */
+    /* Scroll ao clicar em âncoras do menu */
     scroll-behavior: smooth;
     /* Compensa o header fixo: ao rolar até uma âncora, 
        desconta a altura do header do topo */
@@ -134,8 +124,7 @@ button {
     color: inherit;
 }
 
-/* Respeito à preferência de reduzir animações do usuário.
-   Importante para acessibilidade. */
+
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -148,9 +137,6 @@ button {
 }
 
 
-/* =====================================================
-   3. UTILITÁRIOS
-   ===================================================== */
 
 /* Container central com largura máxima */
 .container {
@@ -161,9 +147,7 @@ button {
 }
 
 
-/* =====================================================
-   4. HEADER / NAVEGAÇÃO
-   ===================================================== */
+/*   4. HEADER / NAVEGAÇÃO */
 
 .header {
     position: fixed;
@@ -217,7 +201,7 @@ button {
     padding: 0.5rem 0;
 }
 
-/* Traço animado abaixo do link (aparece no hover e no item ativo) */
+/* Traço animado abaixo do link*/
 .nav__link::after {
     content: '';
     position: absolute;
@@ -284,9 +268,7 @@ button {
 }
 
 
-/* =====================================================
-   5. BOTÕES
-   ===================================================== */
+/* 5. BOTÕES*/
 
 .btn {
     display: inline-block;
@@ -334,9 +316,7 @@ button {
 }
 
 
-/* =====================================================
-   6. SEÇÃO HERO
-   ===================================================== */
+/*   6. SEÇÃO HERO*/
 
 .hero {
     padding-top: calc(var(--header-height) + 4rem);
@@ -452,9 +432,7 @@ button {
 }
 
 
-/* =====================================================
-   7. SEÇÕES GENÉRICAS
-   ===================================================== */
+/* 7. SEÇÕES GENÉRICAS */
 
 .section {
     padding: 6rem 0;
@@ -504,9 +482,7 @@ button {
 }
 
 
-/* =====================================================
-   8. SOBRE MIM
-   ===================================================== */
+/*  8. SOBRE MIM */
 
 .sobre__grid {
     display: grid;
@@ -605,9 +581,7 @@ button {
 }
 
 
-/* =====================================================
-   9. FORMAÇÃO — TIMELINE VERTICAL
-   ===================================================== */
+/*    9. FORMAÇÃO */
 
 .timeline {
     position: relative;
@@ -626,7 +600,7 @@ button {
     padding-bottom: 0;
 }
 
-/* Bolinha na timeline (marca cada evento) */
+/* Bolinha na timeline */
 .timeline__dot {
     position: absolute;
     top: 0.3rem;
@@ -713,9 +687,7 @@ button {
 }
 
 
-/* =====================================================
-   10. PORTFÓLIO — CARDS DE PROJETOS
-   ===================================================== */
+/* 10. PORTFÓLIO  */
 
 .projects {
     display: grid;
@@ -843,9 +815,7 @@ button {
 }
 
 
-/* =====================================================
-   11. CONTATO
-   ===================================================== */
+/* 11. CONTATO*/
 
 .contact__grid {
     display: grid;
@@ -905,7 +875,7 @@ button {
     font-family: var(--font-body);
 }
 
-/* Estado de erro: borda vermelha (aplicado pelo JS) */
+/* Estado de erro: borda vermelha */
 .form-field.is-invalid input,
 .form-field.is-invalid textarea {
     border-color: var(--color-error);
@@ -979,9 +949,7 @@ a.contact-list__item:hover {
 }
 
 
-/* =====================================================
-   12. RODAPÉ
-   ===================================================== */
+/* 12. RODAPÉ */
 
 .footer {
     padding: 2rem 0;
@@ -1013,13 +981,11 @@ a.contact-list__item:hover {
 }
 
 
-/* =====================================================
-   13. MODAL DE CONFIRMAÇÃO
-   ===================================================== */
+/* 13. MODAL DE CONFIRMAÇÃO */
 
 .modal {
     position: fixed;
-    inset: 0;              /* shorthand: top:0 right:0 bottom:0 left:0 */
+    inset: 0;           
     z-index: 2000;
     display: flex;
     align-items: center;
@@ -1086,16 +1052,8 @@ a.contact-list__item:hover {
 }
 
 
-/* =====================================================
-   14. ANIMAÇÃO DE ENTRADA (REVEAL ON SCROLL)
-   Elementos com .reveal aparecem deslizando de baixo
-   quando ficam visíveis na tela (controlado pelo JS).
-   ===================================================== */
+/* 14. ANIMAÇÃO DE ENTRADA (REVEAL ON SCROLL) */
 
-/* Por padrão os elementos ficam VISÍVEIS. 
-   Só são escondidos se o JS tiver ativado o efeito
-   (adicionando .js-reveal-enabled no <body>).
-   Assim, se o JS falhar, o conteúdo continua acessível. */
 .reveal {
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
@@ -1106,9 +1064,7 @@ a.contact-list__item:hover {
 }
 
 
-/* =====================================================
-   15. RESPONSIVIDADE (media queries)
-   ===================================================== */
+/* 15. RESPONSIVIDADE */
 
 /* Tablet (até 900px) */
 @media (max-width: 900px) {

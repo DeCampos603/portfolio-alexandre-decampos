@@ -34,6 +34,8 @@ cd portfolio-alexandre-decampos
 ├── js/script.js
 └── img/
 ```
+## Projetos Futuros
+Adicionar na aba projetos meus Hobbies com trabalhos com audiovisual e desenvolvimento
 
 ## Autor
 

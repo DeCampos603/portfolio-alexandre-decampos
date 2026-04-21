@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    
+     <!--META TAGS: informações da página-->
+   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfólio de Alexandre De Campos — Sargento do Exército Brasileiro, analista de dados e estudante de Ciência de Dados. Projetos em Power BI, SIAFI e automação.">
+    <meta name="author" content="Alexandre De Campos">
+
+    <title>Alexandre De Campos | Portfólio</title>
+
+    <!-- Ícone da aba do navegador (favicon)-->
+    <link rel="icon" type="image/jpeg" href="img/foto-perfil.jpg">
+
+    <!-- Importação de fontes: Inter (texto) e Montserrat (títulos) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Arquivo de estilos -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- CABEÇALHO FIXO COM NAVEGAÇÃO -->
+    <header class="header" id="header">
+        <div class="container header__container">
+
+            <!-- Logo com as iniciais do nome -->
+            <a href="#inicio" class="header__logo" aria-label="Voltar ao topo da página">
+                <span>ADC</span>
+            </a>
+
+            <!-- Botão hamburguer: aparece apenas em telas pequenas (via CSS) -->
+            <button
+                class="nav__toggle"
+                id="navToggle"
+                aria-label="Abrir menu de navegação"
+                aria-expanded="false"
+                aria-controls="navList">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <!-- Menu principal -->
+            <nav class="nav" aria-label="Navegação principal">
+                <ul class="nav__list" id="navList">
+                    <li><a href="#sobre" class="nav__link">Sobre</a></li>
+                    <li><a href="#formacao" class="nav__link">Formação</a></li>
+                    <li><a href="#portfolio" class="nav__link">Portfólio</a></li>
+                    <li><a href="#contato" class="nav__link">Contato</a></li>
+                    <li>
+                        <!-- Botão de troca de tema (claro/escuro) -->
+                        <button
+                            class="theme-toggle"
+                            id="themeToggle"
+                            aria-label="Alternar entre tema claro e escuro"
+                            title="Alternar tema">
+                            <span class="theme-toggle__icon">🌙</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- âncora "inicio" para o logo e botão "voltar ao topo" -->
+    <main id="inicio">
+
+        <!-- SEÇÃO HERO — primeira vista do site
+             Apresenta o nome, título, chamada e foto.-->
+        <section class="hero">
+            <div class="container hero__container">
+
+                <div class="hero__text">
+                    <p class="hero__eyebrow">Olá, eu sou</p>
+                    <h1 class="hero__title">Alexandre<br>De Campos</h1>
+                    <p class="hero__subtitle">
+                        Sargento do Exército Brasileiro · Analista de Dados
+                    </p>
+                    <p class="hero__description">
+                        Transformando dados do setor público em decisões estratégicas,
+                        com foco em Power BI, automação e gestão orçamentária.
+                    </p>
+                    <div class="hero__actions">
+                        <a href="#portfolio" class="btn btn--primary">Ver projetos</a>
+                        <a href="#contato" class="btn btn--outline">Entrar em contato</a>
+                    </div>
+                </div>
+
+                <div class="hero__image-wrapper">
+                    <img
+                        src="img/foto-perfil.jpg"
+                        alt="Foto de perfil de Alexandre De Campos em uma cachoeira"
+                        class="hero__image"
+                        width="380"
+                        height="380">
+                </div>
+
+            </div>
+        </section>
+
+        <!--SEÇÃO 01 — SOBRE MIM-->
+        <section class="section reveal" id="sobre">
+            <div class="container">
+
+                <header class="section__header">
+                    <span class="section__tag">01</span>
+                    <h2 class="section__title">Sobre mim</h2>
+                    <div class="section__divider"></div>
+                </header>
+
+                <div class="sobre__grid">
+
+                    <!-- Texto de apresentação -->
+                    <div class="sobre__content">
+                        <p>
+                            Tenho 24 anos e atuo como <strong>Sargento do Exército Brasileiro</strong>
+                            na Base de Apoio Logístico do Exército (BaApLog). Minha rotina envolve
+                            o desenvolvimento de soluções de análise de dados — principalmente em
+                            Power BI — para apoiar a gestão orçamentária e a tomada de decisão
+                            do comando.
+                        </p>
+                        <p>
+                            Antes de atuar com dados, fui <strong>chefe da equipe de aquisições</strong>,
+                            responsável por processos licitatórios na modalidade Pregão, Dispensa
+                            e Inexigibilidade, com uso diário dos sistemas ComprasNet e SIAFI,
+                            sempre em conformidade com a Lei nº 14.133/21.
+                        </p>
+                        <p>
+                            Também fui <strong>instrutor do Curso de Formação de Cabos</strong>,
+                            experiência que reforçou minha comunicação e didática. Antes do Exército,
+                            trabalhei 5 anos como representante comercial no setor de climatização,
+                            desenvolvendo habilidades de negociação e atendimento.
+                        </p>
+                        <p>
+                            Hoje estou em transição para a área de <strong>Tecnologia da Informação,
+                            com foco em Ciência de Dados</strong>. Busco unir a disciplina militar,
+                            a experiência em gestão pública e a paixão por dados para entregar
+                            soluções que façam diferença — seja no setor público ou privado.
+                        </p>
+                        <p class="sobre__hobbies">
+                            🏔️ Nas horas vagas, encaro trilhas e cachoeiras —
+                            natureza e movimento me ajudam a recarregar as ideias.
+                        </p>
+                    </div>
+
+                    <!-- Card lateral com informações rápidas -->
+                    <aside class="sobre__info">
+
+                        <h3>Rápida</h3>
+                        <ul class="info-list">
+                            <li>
+                                <span class="info-list__label">Idade</span>
+                                <span class="info-list__value">24 anos</span>
+                            </li>
+                            <li>
+                                <span class="info-list__label">Localização</span>
+                                <span class="info-list__value">Rio de Janeiro, RJ</span>
+                            </li>
+                            <li>
+                                <span class="info-list__label">Função atual</span>
+                                <span class="info-list__value">Sargento / AI Engineer · BaApLog</span>
+                            </li>
+                            <li>
+                                <span class="info-list__label">Curso</span>
+                                <span class="info-list__value">Ciência de Dados · UNINTER</span>
+                            </li>
+                        </ul>
+
+                        <h3>Habilidades</h3>
+                        <ul class="skills">
+                            <li class="skill">Power BI</li>
+                            <li class="skill">Python</li>
+                            <li class="skill">Excel Avançado</li>
+                            <li class="skill">SIAFI</li>
+                            <li class="skill">ComprasNet</li>
+                            <li class="skill">HTML/CSS</li>
+                            <li class="skill">Gestão Pública</li>
+                            <li class="skill">Lei 14.133/21</li>
+                        </ul>
+
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!--SEÇÃO 02 — FORMAÇÃO Timeline vertical + cards de cursos-->
+        <section class="section section--alt reveal" id="formacao">
+            <div class="container">
+
+                <header class="section__header">
+                    <span class="section__tag">02</span>
+                    <h2 class="section__title">Formação</h2>
+                    <div class="section__divider"></div>
+                </header>
+
+                <!-- Linha do tempo da formação principal -->
+                <div class="timeline">
+
+                    <article class="timeline__item">
+                        <div class="timeline__dot"></div>
+                        <div class="timeline__content">
+                            <span class="timeline__date">2025 — em andamento</span>
+                            <h3>Bacharelado em Ciência de Dados</h3>
+                            <p class="timeline__institution">UNINTER — Centro Universitário Internacional</p>
+                            <p>
+                                Graduação com foco em análise de dados, estatística,
+                                programação (Python) e modelagem de sistemas.
+                                Atualmente cursando Fundamentos da Programação Web.
+                            </p>
+                        </div>
+                    </article>
+
+                        <article class="timeline__item">
+                        <div class="timeline__dot"></div>
+                        <div class="timeline__content">
+                            <span class="timeline__date">2024 - 2025</span>
+                            <h3>Curso de Formação de Sargentos</h3>
+                            <p class="timeline__institution">Exército Brasileiro</p>
+                            <p>
+                                Formação técnico-profissional destinada à graduação no posto
+                                de Sargento, com ênfase em liderança, comando de pequenas
+                                frações, administração militar e técnica específica da
+                                qualificação. Consolidou o preparo para o exercício de funções
+                                de chefia e assessoramento no nível operacional.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="timeline__item">
+                        <div class="timeline__dot"></div>
+                        <div class="timeline__content">
+                            <span class="timeline__date">2023</span>
+                            <h3>Curso de Formação de Cabos</h3>
+                            <p class="timeline__institution">Exército Brasileiro</p>
+                            <p>
+                                Formação voltada à liderança militar, comando de pequenas
+                                frações e instrução de tropa. Atuei em seguida como
+                                instrutor da turma posterior.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="timeline__item">
+                        <div class="timeline__dot"></div>
+                        <div class="timeline__content">
+                            <span class="timeline__date">2021</span>
+                            <h3>Serviço Militar Inicial</h3>
+                            <p class="timeline__institution">Exército Brasileiro</p>
+                            <p>
+                                Formação básica como Soldado, com atuação em atividades
+                                administrativas e logísticas no Pelotão de Desfazimento.
+                            </p>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- Cursos e aprendizados contínuos -->
+                <div class="courses">
+                    <h3>Cursos e aprendizados contínuos</h3>
+                    <div class="courses__grid">
+
+                        <div class="course-card">
+                            <span class="course-card__icon" aria-hidden="true">📊</span>
+                            <h4>Power BI</h4>
+                            <p>Desenvolvimento de dashboards gerenciais e modelagem DAX.</p>
+                        </div>
+
+                        <div class="course-card">
+                            <span class="course-card__icon" aria-hidden="true">🐍</span>
+                            <h4>Python para Dados</h4>
+                            <p>Pandas, automação de relatórios e tratamento de bases.</p>
+                        </div>
+
+                        <div class="course-card">
+                            <span class="course-card__icon" aria-hidden="true">💻</span>
+                            <h4>Fundamentos Web</h4>
+                            <p>HTML5, CSS3 e JavaScript — aplicados neste portfólio.</p>
+                        </div>
+
+                        <div class="course-card">
+                            <span class="course-card__icon" aria-hidden="true">⚖️</span>
+                            <h4>Licitações Públicas</h4>
+                            <p>Domínio prático da Lei 14.133/21 e processos administrativos.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--SEÇÃO 03 — PORTFÓLIO ards com os projetos reais-->
+        <section class="section reveal" id="portfolio">
+            <div class="container">
+
+                <header class="section__header">
+                    <span class="section__tag">03</span>
+                    <h2 class="section__title">Portfólio</h2>
+                    <div class="section__divider"></div>
+                    <p class="section__lead">
+                        Projetos desenvolvidos no contexto da gestão pública,
+                        com foco em dados e automação.
+                    </p>
+                </header>
+
+                <div class="projects">
+
+                    <!-- PROJETO 1 -->
+                    <article class="project-card">
+                        <div class="project-card__image">
+                            <img
+                                src="img/projeto-dashboard-unificado.png"
+                                alt="Dashboard em Power BI com indicadores de execução orçamentária de 6 unidades militares"
+                                loading="lazy">
+                        </div>
+                        <div class="project-card__body">
+                            <h3>Dashboard de Gestão Orçamentária Unificada</h3>
+                            <div class="project-card__tags">
+                                <span class="tag">Power BI</span>
+                                <span class="tag">SIAFI</span>
+                                <span class="tag">Tesouro Gerencial</span>
+                            </div>
+                            <p>
+                                Painel gerencial que consolida, em tempo quase real,
+                                a execução orçamentária (empenho, liquidação e pagamento)
+                                de <strong>6 Unidades Gestoras</strong> subordinadas à
+                                BaApLog, totalizando mais de <strong>R$ 18 milhões</strong>
+                                em dotação. Transforma planilhas esparsas em um quadro
+                                único para a tomada de decisão do comando.
+                            </p>
+                            <p class="project-card__note">
+                                <em>Projeto institucional — código não público.</em>
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- PROJETO 2 -->
+                    <article class="project-card">
+                        <div class="project-card__image">
+                            <img
+                                src="img/projeto-capacidade-empenho.png"
+                                alt="Dashboard Capacidade de Empenho exibindo saldos de pregão e licitações por vigência"
+                                loading="lazy">
+                        </div>
+                        <div class="project-card__body">
+                            <h3>Dashboard Capacidade de Empenho</h3>
+                            <div class="project-card__tags">
+                                <span class="tag">Power BI</span>
+                                <span class="tag">ComprasNet</span>
+                                <span class="tag">Atas de Registro de Preços</span>
+                            </div>
+                            <p>
+                                Painel estratégico integrado ao ComprasNet para monitoramento
+                                de <strong>47 UGGs</strong>, <strong>32 pregões</strong> e
+                                <strong>290 empresas</strong>, com visualização imediata de
+                                saldos de empenho, vigência das atas e filtros por fornecedor.
+                                Reduz drasticamente o tempo entre consulta e decisão.
+                            </p>
+                            <p class="project-card__note">
+                                <em>Projeto publicado no LinkedIn em post institucional.</em>
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- PROJETO 3 -->
+                    <article class="project-card">
+                        <div class="project-card__image">
+                            <img
+                                src="img/projeto-relatorio-automatico.png"
+                                alt="Exemplo de relatório automatizado de execução orçamentária enviado por e-mail"
+                                loading="lazy">
+                        </div>
+                        <div class="project-card__body">
+                            <h3>Relatório Automatizado de Execução Orçamentária</h3>
+                            <div class="project-card__tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">Automação</span>
+                                <span class="tag">E-mail</span>
+                            </div>
+                            <p>
+                                Aplicação que lê automaticamente a base de dados financeira
+                                das 6 Unidades, calcula indicadores (empenho, liquidação/dotação,
+                                NCs vencidas, restos a pagar), gera insights textuais para
+                                despacho e dispara um <strong>relatório formatado por e-mail
+                                ao comando</strong>, poupando horas de trabalho manual semanal.
+                            </p>
+                            <p class="project-card__note">
+                                <em>Repositório privado por política institucional.</em>
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- PROJETO 4 — este próprio portfólio -->
+                    <article class="project-card">
+                        <div class="project-card__image project-card__image--placeholder">
+                            <span aria-hidden="true">🌐</span>
+                        </div>
+                        <div class="project-card__body">
+                            <h3>Este Portfólio</h3>
+                            <div class="project-card__tags">
+                                <span class="tag">HTML5</span>
+                                <span class="tag">CSS3</span>
+                                <span class="tag">JavaScript</span>
+                            </div>
+                            <p>
+                                Site desenvolvido do zero em HTML5 semântico, CSS3 puro
+                                e JavaScript vanilla, como trabalho prático
+                                da disciplina de Fundamentos da Programação Web.
+                                Inclui tema claro/escuro, menu responsivo, animações
+                                ao rolar a página e formulário validado em JS.
+                            </p>
+                            <p>
+                                
+                                <a href="https://github.com/DeCampos603/portfolio-alexandre-decampos.git"
+                                   class="project-card__link"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Ver código-fonte no GitHub →
+                                </a>
+                            </p>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!--SEÇÃO 04 — CONTATO Formulário + canais alternativos-->
+        <section class="section section--alt reveal" id="contato">
+            <div class="container">
+
+                <header class="section__header">
+                    <span class="section__tag">04</span>
+                    <h2 class="section__title">Contato</h2>
+                    <div class="section__divider"></div>
+                    <p class="section__lead">
+                        Tem uma ideia, uma vaga ou só quer conversar sobre dados?
+                        Manda uma mensagem.
+                    </p>
+                </header>
+
+                <div class="contact__grid">
+
+                    <!-- Formulário com validação-->
+                    <form class="contact__form" id="contactForm" novalidate>
+
+                        <div class="form-field">
+                            <label for="nome">Nome <span aria-hidden="true">*</span></label>
+                            <input
+                                type="text"
+                                id="nome"
+                                name="nome"
+                                required
+                                autocomplete="name"
+                                aria-describedby="nomeError">
+                            <!-- Span onde o JS injeta a mensagem de erro -->
+                            <span class="form-error" id="nomeError" role="alert"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="email">E-mail <span aria-hidden="true">*</span></label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                required
+                                autocomplete="email"
+                                aria-describedby="emailError">
+                            <span class="form-error" id="emailError" role="alert"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="mensagem">Mensagem <span aria-hidden="true">*</span></label>
+                            <textarea
+                                id="mensagem"
+                                name="mensagem"
+                                rows="5"
+                                required
+                                aria-describedby="mensagemError"></textarea>
+                            <span class="form-error" id="mensagemError" role="alert"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn--primary btn--block">
+                            Enviar mensagem
+                        </button>
+                    </form>
+
+                    <!-- Canais alternativos de contato -->
+                    <aside class="contact__info">
+                        <h3>Outros canais</h3>
+                        <ul class="contact-list">
+
+                            <li>
+                                
+                                <a href="mailto:alexandrecbjunior@exemplo.com" class="contact-list__item">
+                                    <span class="contact-list__icon" aria-hidden="true">✉️</span>
+                                    <div>
+                                        <span class="contact-list__label">E-mail</span>
+                                        <span class="contact-list__value">alexandrecbjunior@gmail.com</span>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                
+                                <a href="https://www.linkedin.com/in/alexandre-de-campos-bunn/"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="contact-list__item">
+                                    <span class="contact-list__icon" aria-hidden="true">💼</span>
+                                    <div>
+                                        <span class="contact-list__label">LinkedIn</span>
+                                        <span class="contact-list__value">Alexandre De Campos</span>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                
+                                <a href="https://github.com/DeCampos603"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="contact-list__item">
+                                    <span class="contact-list__icon" aria-hidden="true">💻</span>
+                                    <div>
+                                        <span class="contact-list__label">GitHub</span>
+                                        <span class="contact-list__value">@DeCampos603</span>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <div class="contact-list__item">
+                                    <span class="contact-list__icon" aria-hidden="true">📍</span>
+                                    <div>
+                                        <span class="contact-list__label">Localização</span>
+                                        <span class="contact-list__value">Rio de Janeiro, RJ</span>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </aside>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!--RODAPÉ--> 
+    <footer class="footer">
+        <div class="container footer__container">
+            <p>&copy; 2026 Alexandre De Campos. Feito em HTML5, CSS3 e JavaScript.</p>
+            <p><a href="#inicio">Voltar ao topo ↑</a></p>
+        </div>
+    </footer>
+
+    <!-- MODAL DE CONFIRMAÇÃO DE ENVIO -->
+    <div class="modal" id="successModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal__overlay" id="modalOverlay"></div>
+        <div class="modal__content">
+            <span class="modal__icon" aria-hidden="true">✓</span>
+            <h3 id="modalTitle">Mensagem enviada!</h3>
+            <p>
+                Obrigado pelo contato, <span id="modalName">amigo(a)</span>.
+                Responderei em breve.
+            </p>
+            <button class="btn btn--primary" id="modalClose">Fechar</button>
+        </div>
+    </div>
+
+   
+    <script src="js/script.js"></script>
+
+</body>
+</html>

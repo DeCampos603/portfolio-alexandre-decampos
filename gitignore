@@ -1,0 +1,38 @@
+# =====================================================
+# Arquivos que NÃO devem ir para o GitHub
+# =====================================================
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+ehthumbs.db
+
+# Editor VS Code (configurações pessoais)
+.vscode/
+*.code-workspace
+
+# Outros editores
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# Logs e arquivos temporários
+*.log
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
+
+# Node
+node_modules/
+package-lock.json
+
+# Arquivos pessoais de rascunho
+rascunho/
+anotacoes.txt

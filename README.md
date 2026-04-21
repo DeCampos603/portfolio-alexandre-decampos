@@ -2,11 +2,11 @@
 
 Site pessoal em página única, escrito em HTML, CSS e JavaScript puros. Trabalho prático da disciplina Fundamentos da Programação Web, do curso de Ciência de Dados na UNINTER.
 
-Site no ar: https://SEU-USUARIO.github.io/portfolio-alexandre-decampos/
+Site no ar: https://decampos603.github.io/portfolio-alexandre-decampos/
 
 ## Por que sem framework
 
-O enunciado pede HTML, CSS e JS na mão — sem Bootstrap, Tailwind, React ou jQuery. Para mim fez sentido: prefiro entender o que o navegador está fazendo antes de pular para bibliotecas que resolvem quase tudo por mágica. O CSS usa variáveis para o tema claro/escuro, o JS usa IntersectionObserver para as animações de entrada e para destacar a seção ativa no menu, e a validação do formulário é feita com regex. Nada que um framework faria diferente, só que aqui dá para ler linha por linha.
+O Exercicio proposto pede HTML, CSS e JS na mão. O CSS usa variáveis para o tema claro/escuro, o JS usa IntersectionObserver para as animações de entrada e para destacar a seção ativa no menu, e a validação do formulário é feita com regex. Nada que um framework faria diferente, só que aqui dá para ler linha por linha.
 
 ## O que tem no site
 

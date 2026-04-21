@@ -1,27 +1,12 @@
-/* =====================================================
-   PORTFÓLIO — ALEXANDRE DE CAMPOS
-   JavaScript principal (sem frameworks/libs)
-
-   Seções deste arquivo:
-   1. Menu mobile (hamburguer)
-   2. Alternador de tema claro/escuro
-   3. Destaque do item de menu ativo conforme o scroll
-   4. Animação de entrada dos elementos (reveal)
-   5. Validação e simulação de envio do formulário
-   6. Modal de confirmação
-   7. Remoção de erro ao digitar
-   ===================================================== */
+/*  PORTFÓLIO — ALEXANDRE DE CAMPOS*/
 
 
 // Aguarda o DOM estar totalmente carregado antes de rodar o script.
-// Como nosso <script> está no final do <body>, isso é uma garantia extra.
 document.addEventListener('DOMContentLoaded', () => {
 
 
-    // =================================================
     // 1. MENU MOBILE (HAMBURGUER)
     // Abre e fecha o menu em telas pequenas.
-    // =================================================
 
     const navToggle = document.getElementById('navToggle');
     const navList = document.getElementById('navList');
@@ -35,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Ao clicar em qualquer link do menu, fecha o menu mobile.
-    // Melhora a experiência: usuário clica no link, já vê o conteúdo.
     const navLinks = document.querySelectorAll('.nav__link');
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
@@ -46,11 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // =================================================
     // 2. ALTERNADOR DE TEMA CLARO/ESCURO
-    // Salva a preferência no localStorage, persistindo
-    // entre visitas.
-    // =================================================
+    // Salva a preferência no localStorage
 
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = themeToggle.querySelector('.theme-toggle__icon');
@@ -81,11 +62,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // =================================================
+
     // 3. DESTAQUE DO ITEM DE MENU ATIVO CONFORME SCROLL
-    // Usa IntersectionObserver — API moderna e
-    // performante (não trava o navegador).
-    // =================================================
+    // Usa IntersectionObserver
+
 
     const sections = document.querySelectorAll('main section[id]');
 
@@ -118,15 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(section => sectionObserver.observe(section));
 
 
-    // =================================================
+
     // 4. ANIMAÇÃO DE ENTRADA DOS ELEMENTOS (REVEAL)
-    // Elementos com classe .reveal aparecem deslizando
-    // para cima quando entram na área visível.
-    // =================================================
+
 
     // Ativa o modo "reveal" adicionando classe no <body>.
-    // Só a partir daqui o CSS esconde os elementos.
-    // Se o JS falhar, o conteúdo continua visível.
     document.body.classList.add('js-reveal-enabled');
 
     const revealElements = document.querySelectorAll('.reveal');
@@ -136,8 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    // Para de observar esse elemento — ele já apareceu,
-                    // não precisa mais monitorar (economia de recursos).
+
                     revealObserver.unobserve(entry.target);
                 }
             });
@@ -151,31 +126,27 @@ document.addEventListener('DOMContentLoaded', () => {
     revealElements.forEach(el => revealObserver.observe(el));
 
 
-    // =================================================
+
     // 5. VALIDAÇÃO E SIMULAÇÃO DE ENVIO DO FORMULÁRIO
-    // =================================================
+
 
     const form = document.getElementById('contactForm');
     const nomeInput = document.getElementById('nome');
     const emailInput = document.getElementById('email');
     const mensagemInput = document.getElementById('mensagem');
 
-    // Regex simples mas funcional para validar e-mail.
-    // Exige: texto + @ + texto + . + texto
-    // Aceita: usuario@dominio.com, nome.sobrenome@empresa.com.br etc.
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     form.addEventListener('submit', (event) => {
-        // preventDefault() impede o comportamento padrão do form
-        // (que seria recarregar a página). Sem isso, o JS não roda.
+
         event.preventDefault();
 
-        // Limpa mensagens de erro de uma tentativa anterior
+
         clearErrors();
 
         let isValid = true;
 
-        // ----- Valida campo NOME -----
+        // Valida campo NOME
         if (nomeInput.value.trim() === '') {
             showError(nomeInput, 'nomeError', 'Por favor, informe seu nome.');
             isValid = false;
@@ -184,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
             isValid = false;
         }
 
-        // ----- Valida campo E-MAIL -----
+        //  Valida campo E-MAIL
         if (emailInput.value.trim() === '') {
             showError(emailInput, 'emailError', 'Por favor, informe seu e-mail.');
             isValid = false;
@@ -193,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             isValid = false;
         }
 
-        // ----- Valida campo MENSAGEM -----
+        //Valida campo MENSAGEM
         if (mensagemInput.value.trim() === '') {
             showError(mensagemInput, 'mensagemError', 'Por favor, escreva sua mensagem.');
             isValid = false;
@@ -225,9 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Simula o envio: em um site real, aqui haveria uma
-    // requisição fetch() para um servidor. Como este é um
-    // portfólio estático, apenas mostramos o modal de sucesso.
+
     function simulateSubmit() {
         // Pega o primeiro nome para personalizar a mensagem
         const primeiroNome = nomeInput.value.trim().split(' ')[0];
@@ -238,9 +207,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // =================================================
     // 6. MODAL DE CONFIRMAÇÃO
-    // =================================================
+
 
     const modal = document.getElementById('successModal');
     const modalOverlay = document.getElementById('modalOverlay');
@@ -249,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function openModal() {
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
-        // Impede o scroll da página enquanto o modal está aberto
+
         document.body.style.overflow = 'hidden';
     }
 
@@ -262,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modalClose.addEventListener('click', closeModal);
     modalOverlay.addEventListener('click', closeModal);
 
-    // Permite fechar o modal pressionando ESC (acessibilidade)
+
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal.classList.contains('is-open')) {
             closeModal();
@@ -270,11 +238,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // =================================================
-    // 7. REMOÇÃO DO ERRO AO DIGITAR (feedback imediato)
-    // Se o usuário errou e está corrigindo, o erro some
-    // conforme ele digita. Melhora a experiência.
-    // =================================================
+
+    // 7. REMOÇÃO DO ERRO AO DIGITAR
+
 
     [nomeInput, emailInput, mensagemInput].forEach(input => {
         input.addEventListener('input', () => {
@@ -288,4 +254,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-}); // fim do DOMContentLoaded
+});

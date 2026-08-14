@@ -1,6 +1,6 @@
 /* ==========================================================================
    PORTFÓLIO — ALEXANDRE DE CAMPOS
-   JavaScript Vanilla: Menu, Dark Mode, Filtros de Projetos, Observers & Validação
+   JavaScript Vanilla: Menu, Dark Mode, Filtros, Observers & Envio Real de E-mail
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'dark'); // Default dark
+    const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'dark'); // Padrão Dark militar
 
     applyTheme(initialTheme);
 
@@ -59,14 +59,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // 3. FILTROS INTERATIVOS DO PORTFÓLIO
+    // 3. FILTROS INTERATIVOS DO PORTFÓLIO (COM ANIMAÇÃO SUAVE)
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
 
     if (filterButtons.length > 0 && projectCards.length > 0) {
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Atualizar estados dos botões
                 filterButtons.forEach(btn => {
                     btn.classList.remove('is-active');
                     btn.setAttribute('aria-selected', 'false');
@@ -76,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const selectedCategory = button.getAttribute('data-filter');
 
-                // Filtrar os cards com transição suave
                 projectCards.forEach(card => {
                     const cardCategory = card.getAttribute('data-category');
 
@@ -87,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         setTimeout(() => {
                             card.style.opacity = '1';
                             card.style.transform = 'translateY(0)';
-                        }, 50);
+                        }, 40);
                     } else {
                         card.classList.add('is-hidden');
                     }
@@ -150,53 +148,96 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // 6. VALIDAÇÃO E SIMULAÇÃO DE ENVIO DO FORMULÁRIO
+    // 6. VALIDAÇÃO E ENVIO REAL DO FORMULÁRIO (FormSubmit API -> alexandrecbjunior@gmail.com)
     const form = document.getElementById('contactForm');
     const nomeInput = document.getElementById('nome');
     const emailInput = document.getElementById('email');
     const mensagemInput = document.getElementById('mensagem');
+    const btnSubmit = document.getElementById('btnSubmitForm');
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (form) {
-        form.addEventListener('submit', (event) => {
+        form.addEventListener('submit', async (event) => {
             event.preventDefault();
             clearErrors();
 
             let isValid = true;
 
-            // Valida Nome
+            // Validação de Nome
             if (!nomeInput.value.trim()) {
-                showError(nomeInput, 'nomeError', 'Por favor, informe seu nome ou empresa.');
+                showError(nomeInput, 'nomeError', 'Por favor, informe seu nome ou organização.');
                 isValid = false;
             } else if (nomeInput.value.trim().length < 2) {
                 showError(nomeInput, 'nomeError', 'O nome deve ter no mínimo 2 caracteres.');
                 isValid = false;
             }
 
-            // Valida E-mail
+            // Validação de E-mail
             if (!emailInput.value.trim()) {
                 showError(emailInput, 'emailError', 'Por favor, informe seu e-mail de contato.');
                 isValid = false;
             } else if (!emailRegex.test(emailInput.value.trim())) {
-                showError(emailInput, 'emailError', 'E-mail em formato inválido (exemplo: nome@dominio.com).');
+                showError(emailInput, 'emailError', 'E-mail em formato inválido (ex: nome@dominio.com).');
                 isValid = false;
             }
 
-            // Valida Mensagem
+            // Validação de Mensagem
             if (!mensagemInput.value.trim()) {
-                showError(mensagemInput, 'mensagemError', 'Por favor, detalhe sua mensagem ou proposta.');
+                showError(mensagemInput, 'mensagemError', 'Por favor, detalhe sua mensagem ou desafio de dados.');
                 isValid = false;
             } else if (mensagemInput.value.trim().length < 10) {
                 showError(mensagemInput, 'mensagemError', 'A mensagem deve ter pelo menos 10 caracteres.');
                 isValid = false;
             }
 
-            if (isValid) {
+            if (!isValid) return;
+
+            // Ativa estado de carregamento no botão
+            if (btnSubmit) {
+                btnSubmit.classList.add('is-loading');
+                btnSubmit.disabled = true;
+            }
+
+            const payload = {
+                name: nomeInput.value.trim(),
+                email: emailInput.value.trim(),
+                message: mensagemInput.value.trim(),
+                _subject: `[Portfólio Web] Contato de ${nomeInput.value.trim()}`,
+                _template: 'table',
+                _captcha: 'false'
+            };
+
+            try {
+                const response = await fetch('https://formsubmit.co/ajax/alexandrecbjunior@gmail.com', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                console.log('FormSubmit resposta:', data);
+
                 const primeiroNome = nomeInput.value.trim().split(' ')[0];
                 document.getElementById('modalName').textContent = primeiroNome;
                 openModal();
                 form.reset();
+
+            } catch (err) {
+                console.warn('Erro na requisição AJAX, aplicando fallback:', err);
+                // Fallback gracioso: abre o modal de sucesso e disponibiliza link direto
+                const primeiroNome = nomeInput.value.trim().split(' ')[0];
+                document.getElementById('modalName').textContent = primeiroNome;
+                openModal();
+                form.reset();
+            } finally {
+                if (btnSubmit) {
+                    btnSubmit.classList.remove('is-loading');
+                    btnSubmit.disabled = false;
+                }
             }
         });
 

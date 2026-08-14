@@ -1,6 +1,6 @@
 /* ==========================================================================
    PORTFÓLIO — ALEXANDRE DE CAMPOS
-   AI Engineer · Cientista de Dados · Gestão Orçamentária Pública
+   AI Engineer · Cientista de Dados · Base de Apoio Logístico do Exército (BaApLog)
    ========================================================================== */
 
 /* 1. DESIGN TOKENS & VARIÁVEIS CSS */
@@ -479,6 +479,7 @@ button {
     font-size: 0.95rem;
     transition: all var(--transition-fast);
     cursor: pointer;
+    position: relative;
 }
 
 .btn--primary {
@@ -509,6 +510,30 @@ button {
 
 .btn--block {
     width: 100%;
+}
+
+.btn.is-loading {
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.btn.is-loading .btn__text {
+    visibility: hidden;
+}
+
+.btn.is-loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 
 /* 6. SEÇÕES GERAIS */
@@ -1080,6 +1105,15 @@ button {
     color: var(--color-error);
     margin-top: 0.35rem;
     min-height: 1.1rem;
+}
+
+.form-footnote {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+    text-align: center;
 }
 
 .contact__info {

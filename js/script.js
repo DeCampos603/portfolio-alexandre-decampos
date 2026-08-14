@@ -1,135 +1,156 @@
-/*  PORTFÓLIO — ALEXANDRE DE CAMPOS*/
+/* ==========================================================================
+   PORTFÓLIO — ALEXANDRE DE CAMPOS
+   JavaScript Vanilla: Menu, Dark Mode, Filtros de Projetos, Observers & Validação
+   ========================================================================== */
 
-
-// Aguarda o DOM estar totalmente carregado antes de rodar o script.
 document.addEventListener('DOMContentLoaded', () => {
 
-
-    // 1. MENU MOBILE (HAMBURGUER)
-    // Abre e fecha o menu em telas pequenas.
-
+    // 1. MENU MOBILE (HAMBÚRGUER)
     const navToggle = document.getElementById('navToggle');
     const navList = document.getElementById('navList');
+    const nav = document.querySelector('.nav');
 
-    navToggle.addEventListener('click', () => {
-        // toggle() adiciona a classe se não existir e remove se existir
-        const isOpen = navList.classList.toggle('is-open');
-        navToggle.classList.toggle('is-active');
-        // Atualiza atributo ARIA para leitores de tela
-        navToggle.setAttribute('aria-expanded', isOpen);
-    });
-
-    // Ao clicar em qualquer link do menu, fecha o menu mobile.
-    const navLinks = document.querySelectorAll('.nav__link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navList.classList.remove('is-open');
-            navToggle.classList.remove('is-active');
-            navToggle.setAttribute('aria-expanded', 'false');
+    if (navToggle && navList) {
+        navToggle.addEventListener('click', () => {
+            const isOpen = navList.classList.toggle('is-open');
+            nav.style.display = isOpen ? 'block' : '';
+            navToggle.classList.toggle('is-active');
+            navToggle.setAttribute('aria-expanded', isOpen);
         });
-    });
 
-
-    // 2. ALTERNADOR DE TEMA CLARO/ESCURO
-    // Salva a preferência no localStorage
-
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = themeToggle.querySelector('.theme-toggle__icon');
-    const rootEl = document.documentElement; // <html>
-
-    // Descobre o tema inicial:
-    // 1º) Busca o salvo no localStorage
-    // 2º) Se não tiver, usa a preferência do sistema operacional
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
-
-    applyTheme(initialTheme);
-
-    // Ao clicar no botão, inverte o tema
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = rootEl.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        applyTheme(newTheme);
-        localStorage.setItem('theme', newTheme);
-    });
-
-    // Aplica o tema escolhido
-    function applyTheme(theme) {
-        rootEl.setAttribute('data-theme', theme);
-        // Troca o ícone: lua no tema claro, sol no tema escuro
-        themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        // Fechar ao clicar em um link
+        const navLinks = document.querySelectorAll('.nav__link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navList.classList.remove('is-open');
+                if (nav) nav.style.display = '';
+                navToggle.classList.remove('is-active');
+                navToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
     }
 
 
+    // 2. TEMA CLARO / ESCURO (DARK MODE)
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle ? themeToggle.querySelector('.theme-toggle__icon') : null;
+    const rootEl = document.documentElement;
 
-    // 3. DESTAQUE DO ITEM DE MENU ATIVO CONFORME SCROLL
-    // Usa IntersectionObserver
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'dark'); // Default dark
 
+    applyTheme(initialTheme);
 
-    const sections = document.querySelectorAll('main section[id]');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = rootEl.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    }
 
-    const sectionObserver = new IntersectionObserver(
-        (entries) => {
-            entries.forEach(entry => {
-                const sectionId = entry.target.id;
-                const correspondingLink = document.querySelector(
-                    `.nav__link[href="#${sectionId}"]`
-                );
-
-                if (!correspondingLink) return;
-
-                if (entry.isIntersecting) {
-                    // Remove a classe .is-active de TODOS os links...
-                    navLinks.forEach(l => l.classList.remove('is-active'));
-                    // ...e adiciona apenas no link da seção visível.
-                    correspondingLink.classList.add('is-active');
-                }
-            });
-        },
-        {
-            // O elemento só é considerado "visível" quando sua área
-            // cruza a região central da tela (entre 40% e 60%).
-            rootMargin: '-40% 0px -40% 0px',
-            threshold: 0
+    function applyTheme(theme) {
+        rootEl.setAttribute('data-theme', theme);
+        if (themeIcon) {
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
         }
-    );
-
-    sections.forEach(section => sectionObserver.observe(section));
+    }
 
 
+    // 3. FILTROS INTERATIVOS DO PORTFÓLIO
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
 
-    // 4. ANIMAÇÃO DE ENTRADA DOS ELEMENTOS (REVEAL)
+    if (filterButtons.length > 0 && projectCards.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Atualizar estados dos botões
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('is-active');
+                    btn.setAttribute('aria-selected', 'false');
+                });
+                button.classList.add('is-active');
+                button.setAttribute('aria-selected', 'true');
+
+                const selectedCategory = button.getAttribute('data-filter');
+
+                // Filtrar os cards com transição suave
+                projectCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+
+                    if (selectedCategory === 'all' || cardCategory === selectedCategory) {
+                        card.classList.remove('is-hidden');
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(12px)';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 50);
+                    } else {
+                        card.classList.add('is-hidden');
+                    }
+                });
+            });
+        });
+    }
 
 
-    // Ativa o modo "reveal" adicionando classe no <body>.
+    // 4. DESTAQUE DO MENU CONFORME O SCROLL (SPY SCROLL)
+    const sections = document.querySelectorAll('main section[id]');
+    const navLinks = document.querySelectorAll('.nav__link');
+
+    if (sections.length > 0 && 'IntersectionObserver' in window) {
+        const sectionObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionId = entry.target.id;
+                        const activeLink = document.querySelector(`.nav__link[href="#${sectionId}"]`);
+
+                        if (activeLink) {
+                            navLinks.forEach(l => l.classList.remove('is-active'));
+                            activeLink.classList.add('is-active');
+                        }
+                    }
+                });
+            },
+            {
+                rootMargin: '-35% 0px -35% 0px',
+                threshold: 0
+            }
+        );
+
+        sections.forEach(section => sectionObserver.observe(section));
+    }
+
+
+    // 5. ANIMAÇÕES DE ENTRADA AO ROLAR (SCROLL REVEAL)
     document.body.classList.add('js-reveal-enabled');
-
     const revealElements = document.querySelectorAll('.reveal');
 
-    const revealObserver = new IntersectionObserver(
-        (entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
+    if (revealElements.length > 0 && 'IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.12,
+                rootMargin: '0px 0px -40px 0px'
+            }
+        );
 
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        },
-        {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
-        }
-    );
-
-    revealElements.forEach(el => revealObserver.observe(el));
-
-
-
-    // 5. VALIDAÇÃO E SIMULAÇÃO DE ENVIO DO FORMULÁRIO
+        revealElements.forEach(el => revealObserver.observe(el));
+    }
 
 
+    // 6. VALIDAÇÃO E SIMULAÇÃO DE ENVIO DO FORMULÁRIO
     const form = document.getElementById('contactForm');
     const nomeInput = document.getElementById('nome');
     const emailInput = document.getElementById('email');
@@ -137,121 +158,100 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    form.addEventListener('submit', (event) => {
+    if (form) {
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            clearErrors();
 
-        event.preventDefault();
+            let isValid = true;
 
+            // Valida Nome
+            if (!nomeInput.value.trim()) {
+                showError(nomeInput, 'nomeError', 'Por favor, informe seu nome ou empresa.');
+                isValid = false;
+            } else if (nomeInput.value.trim().length < 2) {
+                showError(nomeInput, 'nomeError', 'O nome deve ter no mínimo 2 caracteres.');
+                isValid = false;
+            }
 
-        clearErrors();
+            // Valida E-mail
+            if (!emailInput.value.trim()) {
+                showError(emailInput, 'emailError', 'Por favor, informe seu e-mail de contato.');
+                isValid = false;
+            } else if (!emailRegex.test(emailInput.value.trim())) {
+                showError(emailInput, 'emailError', 'E-mail em formato inválido (exemplo: nome@dominio.com).');
+                isValid = false;
+            }
 
-        let isValid = true;
+            // Valida Mensagem
+            if (!mensagemInput.value.trim()) {
+                showError(mensagemInput, 'mensagemError', 'Por favor, detalhe sua mensagem ou proposta.');
+                isValid = false;
+            } else if (mensagemInput.value.trim().length < 10) {
+                showError(mensagemInput, 'mensagemError', 'A mensagem deve ter pelo menos 10 caracteres.');
+                isValid = false;
+            }
 
-        // Valida campo NOME
-        if (nomeInput.value.trim() === '') {
-            showError(nomeInput, 'nomeError', 'Por favor, informe seu nome.');
-            isValid = false;
-        } else if (nomeInput.value.trim().length < 2) {
-            showError(nomeInput, 'nomeError', 'Nome muito curto (mínimo 2 caracteres).');
-            isValid = false;
-        }
+            if (isValid) {
+                const primeiroNome = nomeInput.value.trim().split(' ')[0];
+                document.getElementById('modalName').textContent = primeiroNome;
+                openModal();
+                form.reset();
+            }
+        });
 
-        //  Valida campo E-MAIL
-        if (emailInput.value.trim() === '') {
-            showError(emailInput, 'emailError', 'Por favor, informe seu e-mail.');
-            isValid = false;
-        } else if (!emailRegex.test(emailInput.value.trim())) {
-            showError(emailInput, 'emailError', 'E-mail em formato inválido (ex: nome@dominio.com).');
-            isValid = false;
-        }
+        // Limpeza de erros em tempo real
+        [nomeInput, emailInput, mensagemInput].forEach(input => {
+            if (!input) return;
+            input.addEventListener('input', () => {
+                const field = input.parentElement;
+                const errorSpan = field.querySelector('.form-error');
+                if (field.classList.contains('is-invalid')) {
+                    field.classList.remove('is-invalid');
+                    if (errorSpan) errorSpan.textContent = '';
+                }
+            });
+        });
+    }
 
-        //Valida campo MENSAGEM
-        if (mensagemInput.value.trim() === '') {
-            showError(mensagemInput, 'mensagemError', 'Por favor, escreva sua mensagem.');
-            isValid = false;
-        } else if (mensagemInput.value.trim().length < 10) {
-            showError(mensagemInput, 'mensagemError', 'Mensagem muito curta (mínimo 10 caracteres).');
-            isValid = false;
-        }
-
-        // Se TODAS as validações passaram, simula o envio
-        if (isValid) {
-            simulateSubmit();
-        }
-    });
-
-    // Exibe mensagem de erro abaixo de um campo
     function showError(inputElement, errorElementId, message) {
         const errorElement = document.getElementById(errorElementId);
-        errorElement.textContent = message;
-        inputElement.parentElement.classList.add('is-invalid');
+        if (errorElement) errorElement.textContent = message;
+        if (inputElement.parentElement) inputElement.parentElement.classList.add('is-invalid');
     }
 
-    // Limpa todas as mensagens de erro da tela
     function clearErrors() {
-        document.querySelectorAll('.form-error').forEach(el => {
-            el.textContent = '';
-        });
-        document.querySelectorAll('.form-field').forEach(el => {
-            el.classList.remove('is-invalid');
-        });
+        document.querySelectorAll('.form-error').forEach(el => el.textContent = '');
+        document.querySelectorAll('.form-field').forEach(el => el.classList.remove('is-invalid'));
     }
 
 
-    function simulateSubmit() {
-        // Pega o primeiro nome para personalizar a mensagem
-        const primeiroNome = nomeInput.value.trim().split(' ')[0];
-        document.getElementById('modalName').textContent = primeiroNome;
-
-        openModal();
-        form.reset();       // limpa todos os campos
-    }
-
-
-    // 6. MODAL DE CONFIRMAÇÃO
-
-
+    // 7. MODAL DE CONFIRMAÇÃO
     const modal = document.getElementById('successModal');
     const modalOverlay = document.getElementById('modalOverlay');
     const modalClose = document.getElementById('modalClose');
 
     function openModal() {
+        if (!modal) return;
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
-
         document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
+        if (!modal) return;
         modal.classList.remove('is-open');
         modal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
     }
 
-    modalClose.addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', closeModal);
-
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
 
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+        if (e.key === 'Escape' && modal && modal.classList.contains('is-open')) {
             closeModal();
         }
     });
-
-
-
-    // 7. REMOÇÃO DO ERRO AO DIGITAR
-
-
-    [nomeInput, emailInput, mensagemInput].forEach(input => {
-        input.addEventListener('input', () => {
-            const field = input.parentElement;
-            const errorSpan = field.querySelector('.form-error');
-            if (field.classList.contains('is-invalid')) {
-                field.classList.remove('is-invalid');
-                errorSpan.textContent = '';
-            }
-        });
-    });
-
 
 });
